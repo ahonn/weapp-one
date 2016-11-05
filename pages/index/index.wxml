@@ -1,4 +1,3 @@
-<!--index.wxml-->
 <view class="container">
   <swiper class="vol-swiper">
     <block wx:for="{{volsData}}" wx:key="{{hpcontent_id}}">
@@ -10,7 +9,10 @@
             <text class="vol-author">{{item.hp_author}}</text>
           </view>
           <view class="vol-content">
-            <text class="vol-content-desc">{{item.hp_content}}</text>
+            <text class="vol-content-text">{{item.hp_content}}</text>
+          </view>
+          <view class="vol-makettime">
+            <text class="vol-makettime-text">{{item.hp_makettime}}</text>
           </view>
         </view>
       </swiper-item>

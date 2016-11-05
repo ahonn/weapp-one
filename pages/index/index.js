@@ -1,4 +1,5 @@
 var app = getApp()
+var util = require('../../utils/util.js')
 Page({
   data: {
     volsData: []
@@ -14,8 +15,12 @@ Page({
           'Content-Type': 'application/json'
       },
       success: function(res) {
+        var data = res.data.data
+        data.map(function (item) {
+          item.hp_makettime = util.formatMakettime(item.hp_makettime)
+        })
         that.setData({
-          volsData: res.data.data
+          volsData: data
         })
         console.log(that.data.volsData)
       }

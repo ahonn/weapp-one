@@ -77,8 +77,8 @@
   text-align: right;
 }
 
-.music-content-control {
-  margin: 0 20rpx;
+.music-content {
+  margin: 0 20rpx 25rpx 20rpx;
 }
 
 .music-content-header {

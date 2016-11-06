@@ -28,10 +28,10 @@
               </view>
             </view>
             <view class="music-content">
-              <view class="music-content-control">
-                <include wx:if="{{content === 'story'}}" src="include/story.wxml" />
-                <include wx:elif="{{content === 'lyric'}}" src="include/lyric.wxml" />
-                <include wx:elif="{{content === 'about'}}" src="include/about.wxml" />
+              <include wx:if="{{content === 'story'}}" src="include/story.wxml" />
+              <include wx:elif="{{content === 'lyric'}}" src="include/lyric.wxml" />
+              <include wx:elif="{{content === 'about'}}" src="include/about.wxml" />
+              <view >
               </view>
             </view>
           </view>

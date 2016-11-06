@@ -2,7 +2,8 @@
   "pages":[
     "pages/index/index",
     "pages/reading/reading",
-    "pages/music/music"
+    "pages/music/music",
+    "pages/movie/movie"
   ],
   "window":{
     "backgroundTextStyle":"light",

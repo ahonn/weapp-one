@@ -1,7 +1,8 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/reading/reading"
+    "pages/reading/reading",
+    "pages/music/music"
   ],
   "window":{
     "backgroundTextStyle":"light",

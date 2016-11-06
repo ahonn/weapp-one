@@ -12,13 +12,12 @@
 }
 
 .articles {
-  width: calc(100% + 20rpx);
+  width: calc(100% + 30rpx);
   height: 100%;
 }
 
 .articles-card {
-  /* height: 500px; */
-  margin: 20rpx 40rpx 20rpx 20rpx;
+  margin: 20rpx 50rpx 20rpx 20rpx;
   border: 1px solid #ebebeb;
   border-radius: 3px;
 }
@@ -28,7 +27,7 @@
 }
 
 .article-header {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .article-title {

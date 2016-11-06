@@ -1,4 +1,3 @@
-var app = getApp()
 var util = require('../../utils/util.js')
 Page({
   data: {
@@ -12,17 +11,18 @@ Page({
     wx.request({
       url: 'http://v3.wufazhuce.com:8000/api/hp/bymonth/' + strDate, 
       header: {
-          'Content-Type': 'application/json'
+        'Content-Type': 'application/json'
       },
       success: function(res) {
-        var data = res.data.data
-        data.map(function (item) {
-          item.hp_makettime = util.formatMakettime(item.hp_makettime)
-        })
-        that.setData({
-          volsData: data
-        })
-        console.log(that.data.volsData)
+        if (res.data.res === 0) {
+          var data = res.data.data
+          data.map(function (item) {
+            item.hp_makettime = util.formatMakettime(item.hp_makettime)
+          })
+          that.setData({
+            volsData: data
+          })
+        }
       }
     })
   }

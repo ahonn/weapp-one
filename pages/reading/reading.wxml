@@ -1,0 +1,58 @@
+<view class="container">
+  <swiper class="carousel" indicator-dots="true" autoplay="true">
+    <block wx:for="{{carousel}}" wx:key="{{id}}">
+      <swiper-item>
+        <view class="carousel-item">
+          <image class="carousel-cover" src="{{item.cover}}" mode="scaleToFill"></image>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+  
+  <swiper class="articles-swiper">
+    <block wx:for="{{articles.essay}}" wx:for-index="idx" wx:key="{{content_id}}">
+      <swiper-item class="articles-swiper-item">
+        <scroll-view class="articles" scroll-y="true">
+          <view class="articles-card">
+            <view class="article-item">
+              <view class="article-header">
+                <text class="article-title">{{articles["essay"][idx].hp_title}}</text>
+                <text class="article-type">短篇</text>
+                <view class="article-author">
+                  <text>{{articles["essay"][idx].author[0].user_name}}</text>
+                </view>
+              </view>
+              <view class="article-content">
+                <text>{{articles["essay"][idx].guide_word}}</text>
+              </view>
+            </view>
+            <view class="article-item">
+              <view class="article-header">
+                <text class="article-title">{{articles["serial"][idx].title}}</text>
+                <text class="article-type">连载</text>
+                <view class="article-author">
+                  <text>{{articles["serial"][idx].author.user_name}}</text>
+                </view>
+              </view>
+              <view class="article-content">
+                <text>{{articles["serial"][idx].excerpt}}</text>
+              </view>
+            </view>
+            <view class="article-item">
+              <view class="article-header">
+                <text class="article-title">{{articles["question"][idx].question_title}}</text>
+                <text class="article-type">问答</text>
+                <view class="article-author">
+                  <text>{{articles["question"][idx].answer_title}}</text>
+                </view>
+              </view>
+              <view class="article-content">
+                <text>{{articles["question"][idx].answer_content}}</text>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>

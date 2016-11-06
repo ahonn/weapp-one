@@ -3,14 +3,14 @@
 }
 
 .vol-swiper-item {
-  padding: 0 25rpx;
+  padding: 25rpx;
   box-sizing: border-box;
 }
 
 .vol-card {
   padding: 20rpx;
   border: 1px solid #ebebeb;
-  border-radius: 2px;
+  border-radius: 3px;
   box-shadow: 1px 1px 1px #ebebeb;
 }
 

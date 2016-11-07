@@ -1,7 +1,7 @@
 <view class="container">
   <scroll-view class="movies" scroll-y="true" bindscrolltolower="getMoreMovies">
     <view wx:for="{{movies}}" class="movie" wx:key="id">
-      <image class="movie-cover" src="{{item.cover}}" mode="aspectFill"></image>
+      <image class="movie-cover" src="{{item.cover}}" mode="scaleToFill"></image>
     </view>
   </scroll-view>
 </view>

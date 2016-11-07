@@ -13,9 +13,6 @@ Page({
       success: function(res) {
         if (res.data.res === 0) {
           var idList = res.data.data.slice(0, 9)
-          // data.map(function (item) {
-          //   item.hp_makettime = util.formatMakettime(item.hp_makettime)
-          // })
           idList.map(function (id) {
             that.getVols(id)
           })

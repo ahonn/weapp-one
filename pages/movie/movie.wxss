@@ -1,0 +1,13 @@
+.movies {
+  height: 100%;
+}
+
+.movie {
+  margin-bottom: 5px;
+}
+
+.movie-cover {
+  width: 100%;
+  height: 160px;
+  box-shadow: 0 2px 2px #ebebeb;
+}

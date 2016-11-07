@@ -8,6 +8,9 @@ Page({
   },
   onLoad: function () {
     var that = this
+    wx.setNavigationBarTitle({
+      title: '音乐'
+    })
     wx.request({
       url: 'http://v3.wufazhuce.com:8000/api/music/idlist/0',
       header: {

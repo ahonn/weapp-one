@@ -1,6 +1,8 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/index/history/history",
+    "pages/index/monthly/monthly",
     "pages/reading/reading",
     "pages/music/music",
     "pages/movie/movie"

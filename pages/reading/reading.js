@@ -6,6 +6,9 @@ Page({
   onLoad: function () {
     var that = this
 
+    wx.setNavigationBarTitle({
+      title: '阅读'
+    })
     // get reading carousel
     wx.request({
       url: 'http://v3.wufazhuce.com:8000/api/reading/carousel',

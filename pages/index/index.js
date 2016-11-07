@@ -1,7 +1,8 @@
 var util = require('../../utils/util.js')
 Page({
   data: {
-    volsData: []
+    volsData: [],
+    current: 8
   },
   onLoad: function () {
     var that = this
@@ -45,5 +46,24 @@ Page({
         }
       }
     })
+  },
+  handleChange: function (e) {
+    var that = this
+    var current = e.detail.current
+    var volsLength = this.data.volsData.length
+
+    if (current === volsLength) {
+      this.setData({
+        current: volsLength
+      })
+      wx.navigateTo({
+        url: 'history/history',
+        success: function () {
+          that.setData({
+            current: volsLength - 1
+          })
+        }
+      })
+    }
   }
 })

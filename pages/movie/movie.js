@@ -5,6 +5,10 @@ Page({
   },
   onLoad: function () {
     var that = this
+
+    wx.setNavigationBarTitle({
+      title: '电影'
+    })
     wx.request({
       url: 'http://v3.wufazhuce.com:8000/api/movie/list/0',
       header: {

@@ -2,7 +2,7 @@ var util = require('../../utils/util.js')
 Page({
   data: {
     volsData: [],
-    current: 8
+    current: 0
   },
   onLoad: function () {
     var that = this

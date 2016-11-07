@@ -12,7 +12,7 @@ Page({
   handleTap: function (e) {
     var month = e.target.dataset.month
     wx.navigateTo({
-      url: '../monthly/monthly'
+      url: '../monthly/monthly?month=' + month
     })
   }
 })

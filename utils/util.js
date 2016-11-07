@@ -1,7 +1,7 @@
 
 
 function formatMakettime(dateString) {
-   return (new Date(dateString)).toString().split(' ', 4).join(' ')  
+   return (new Date(dateString)).toString().split(' ', 4).slice(1, 4).join(' ')  
 }
 
 function getDateList() {

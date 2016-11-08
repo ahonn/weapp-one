@@ -3,7 +3,7 @@ Page({
   data: {
     monthly: []
   },
-  onLoad: function (option) {
+  onLoad: function (options) {
     var that = this
 
     wx.showToast({
@@ -11,7 +11,7 @@ Page({
       icon: 'loading'
     })
     wx.request({
-      url: 'http://v3.wufazhuce.com:8000/api/hp/bymonth/' + option.month,
+      url: 'http://v3.wufazhuce.com:8000/api/hp/bymonth/' + options.month,
       header: {
         'Content-Type': 'application/json'
       },
@@ -29,6 +29,12 @@ Page({
           wx.hideToast()
         }
       }
+    })
+  },
+  handleTap: function (e) {
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '../vol/vol?id=' + id
     })
   }
 })

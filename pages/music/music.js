@@ -83,7 +83,6 @@ Page({
     })
   },
   playMusic: function (music) {  
-    var that = this
     wx.playBackgroundAudio({
       dataUrl: music.music_id,
       title: music.title,

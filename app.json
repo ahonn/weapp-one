@@ -5,6 +5,9 @@
     "pages/index/monthly/monthly",
     "pages/index/vol/vol",
     "pages/reading/reading",
+    "pages/reading/essay/essay",
+    "pages/reading/serial/serial",
+    "pages/reading/question/question",
     "pages/music/music",
     "pages/movie/movie"
   ],

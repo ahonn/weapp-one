@@ -5,7 +5,7 @@ Page({
   },
   onLoad: function (options) {
     var that = this
-    console.log(options.id)
+
     wx.request({
       url: 'http://v3.wufazhuce.com:8000/api/hp/detail/' + options.id,
       header: {

@@ -14,7 +14,7 @@
       <swiper-item class="articles-swiper-item">
         <scroll-view class="articles" scroll-y="true">
           <view class="articles-card">
-            <view class="article-item">
+            <view class="article-item" data-id="{{articles['essay'][idx].content_id}}" bindtap="tapEssay">
               <view class="article-header">
                 <text class="article-title">{{articles["essay"][idx].hp_title}}</text>
                 <text class="article-type">短篇</text>
@@ -26,7 +26,7 @@
                 <text>{{articles["essay"][idx].guide_word}}</text>
               </view>
             </view>
-            <view class="article-item">
+            <view class="article-item" data-id="{{articles['serial'][idx].id}}" bindtap="tapSerial">
               <view class="article-header">
                 <text class="article-title">{{articles["serial"][idx].title}}</text>
                 <text class="article-type">连载</text>
@@ -38,7 +38,7 @@
                 <text>{{articles["serial"][idx].excerpt}}</text>
               </view>
             </view>
-            <view class="article-item">
+            <view class="article-item" data-id="{{articles['question'][idx].question_id}}" bindtap="tapQuestion">
               <view class="article-header">
                 <text class="article-title">{{articles["question"][idx].question_title}}</text>
                 <text class="article-type">问答</text>

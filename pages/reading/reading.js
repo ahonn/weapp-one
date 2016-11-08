@@ -9,7 +9,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '阅读'
     })
-    // get reading carousel
+
     wx.request({
       url: 'http://v3.wufazhuce.com:8000/api/reading/carousel',
       header: {
@@ -25,7 +25,6 @@ Page({
       }
     })
     
-    // get reading articles
     wx.request({
       url: 'http://v3.wufazhuce.com:8000/api/reading/index',
       header: {
@@ -39,6 +38,24 @@ Page({
           })
         }
       }
+    })
+  },
+  tapEssay: function (e) {
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: 'essay/essay?id=' + id
+    })
+  },
+  tapSerial: function (e) {
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: 'serial/serial?id=' + id
+    })
+  },
+  tapQuestion: function (e) {
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: 'question/question?id=' + id
     })
   }
 })

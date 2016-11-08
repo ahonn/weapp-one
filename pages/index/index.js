@@ -1,7 +1,7 @@
 var util = require('../../utils/util.js')
 Page({
   data: {
-    volsData: [],
+    vols: [],
     current: 0
   },
   onLoad: function () {
@@ -31,17 +31,17 @@ Page({
       success: function(res) {
         if (res.data.res === 0) {
           var vol = res.data.data
-          var volsData = that.data.volsData
+          var vols = that.data.vols
           
           vol.date = new Date(vol.hp_makettime)
           vol.hp_makettime = util.formatMakettime(vol.hp_makettime)
-          volsData.push(vol)
-          volsData.sort(function (a, b) {
+          vols.push(vol)
+          vols.sort(function (a, b) {
             return b.date - a.date
           })
 
           that.setData({
-            volsData: volsData
+            vols: vols
           })
         }
       }
@@ -50,7 +50,7 @@ Page({
   handleChange: function (e) {
     var that = this
     var current = e.detail.current
-    var volsLength = this.data.volsData.length
+    var volsLength = this.data.vols.length
 
     if (current === volsLength) {
       this.setData({

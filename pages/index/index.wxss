@@ -37,7 +37,7 @@
 
 .vol-content-text {
   width: 100%;
-  height: 200rpx;
+  min-height: 200rpx;
   display: inline-block;
 }
 

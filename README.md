@@ -1,4 +1,4 @@
-# wechat-one
+# weapp-one
 
 仿 [「ONE · 一个」](http://www.wandoujia.com/apps/one.hh.oneclient) 的微信小程序
 

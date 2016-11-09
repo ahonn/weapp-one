@@ -9,50 +9,23 @@
     </block>
   </swiper>
   
-  <swiper class="articles-swiper">
+  <swiper class="articles-swiper" current="{{current}}" bindchange="handleChange">
     <block wx:for="{{articles.essay}}" wx:for-index="idx" wx:key="{{content_id}}">
       <swiper-item class="articles-swiper-item">
         <scroll-view class="articles" scroll-y="true">
           <view class="articles-card">
-            <view class="article-item" data-id="{{articles['essay'][idx].content_id}}" bindtap="tapEssay">
-              <view class="article-header">
-                <text class="article-title">{{articles["essay"][idx].hp_title}}</text>
-                <text class="article-type">短篇</text>
-                <view class="article-author">
-                  <text>{{articles["essay"][idx].author[0].user_name}}</text>
-                </view>
-              </view>
-              <view class="article-content">
-                <text>{{articles["essay"][idx].guide_word}}</text>
-              </view>
-            </view>
-            <view class="article-item" data-id="{{articles['serial'][idx].id}}" bindtap="tapSerial">
-              <view class="article-header">
-                <text class="article-title">{{articles["serial"][idx].title}}</text>
-                <text class="article-type">连载</text>
-                <view class="article-author">
-                  <text>{{articles["serial"][idx].author.user_name}}</text>
-                </view>
-              </view>
-              <view class="article-content">
-                <text>{{articles["serial"][idx].excerpt}}</text>
-              </view>
-            </view>
-            <view class="article-item" data-id="{{articles['question'][idx].question_id}}" bindtap="tapQuestion">
-              <view class="article-header">
-                <text class="article-title">{{articles["question"][idx].question_title}}</text>
-                <text class="article-type">问答</text>
-                <view class="article-author">
-                  <text>{{articles["question"][idx].answer_title}}</text>
-                </view>
-              </view>
-              <view class="article-content">
-                <text>{{articles["question"][idx].answer_content}}</text>
-              </view>
-            </view>
+            <import src="templates/essayItem.wxml"/>
+            <template is="essay-item" data="{{item: articles['essay'][idx]}}"/>
+
+            <import src="templates/serialItem.wxml"/>
+            <template is="serial-item" data="{{item: articles['serial'][idx]}}"/>
+
+            <import src="templates/questionItem.wxml"/>
+            <template is="question-item" data="{{item: articles['question'][idx]}}"/>
           </view>
         </scroll-view>
       </swiper-item>
     </block>
+    <swiper-item></swiper-item>
   </swiper>
 </view>

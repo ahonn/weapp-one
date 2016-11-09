@@ -1,15 +1,16 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/index/history/history",
     "pages/index/monthly/monthly",
     "pages/index/vol/vol",
     "pages/reading/reading",
+    "pages/reading/monthly/monthly",
     "pages/reading/essay/essay",
     "pages/reading/serial/serial",
     "pages/reading/question/question",
     "pages/music/music",
-    "pages/movie/movie"
+    "pages/movie/movie",
+    "pages/history/history"
   ],
   "window":{
     "backgroundTextStyle":"light",

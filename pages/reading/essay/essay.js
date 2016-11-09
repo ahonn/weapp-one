@@ -2,7 +2,7 @@ var util = require('../../../utils/util.js')
 Page({
   data: {
     essay: {},
-    playText: '播放',
+    playText: '收听',
     playImg: '../../../image/audio_play.png'
   },
   onLoad: function (options) {
@@ -29,12 +29,12 @@ Page({
     var playText = this.data.playText
     
     var playImg
-    if (playText === '播放') {
+    if (playText === '收听') {
       playText = '暂停'
       playImg = '../../../image/audio_pause.png'
       this.playAudio(audio)
     } else {
-      playText = '播放'
+      playText = '收听'
       playImg = '../../../image/audio_play.png'
       this.pauseAudio()
     }

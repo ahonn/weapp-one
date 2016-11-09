@@ -1,7 +1,8 @@
 Page({
   data: {
     carousel: [],
-    articles: {}
+    articles: {},
+    current: 0
   },
   onLoad: function () {
     var that = this
@@ -57,5 +58,24 @@ Page({
     wx.navigateTo({
       url: 'question/question?id=' + id
     })
+  },
+  handleChange: function (e) {
+    var that = this
+    var current = e.detail.current
+    var length = this.data.articles.essay.length
+
+    if (current === length) {
+      this.setData({
+        current: length
+      })
+      wx.navigateTo({
+        url: '../history/history?page=reading',
+        success: function () {
+          that.setData({
+            current: length - 1
+          })
+        }
+      })
+    }
   }
 })

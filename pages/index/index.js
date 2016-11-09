@@ -57,7 +57,7 @@ Page({
         current: volsLength
       })
       wx.navigateTo({
-        url: 'history/history',
+        url: '../history/history?page=index',
         success: function () {
           that.setData({
             current: volsLength - 1

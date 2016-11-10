@@ -1,7 +1,7 @@
 var util = require('../../../utils/util.js')
 Page({
   data: {
-    vol: []
+    detail: []
   },
   onLoad: function (options) {
     var that = this
@@ -13,10 +13,10 @@ Page({
       },
       success: function (res) {
         if (res.data.res === 0) {
-          var vol = res.data.data
-          vol.hp_makettime = util.formatMakettime(vol.hp_makettime)
+          var detail = res.data.data
+          detail.hp_makettime = util.formatMakettime(detail.hp_makettime)
           that.setData({
-            vol: vol
+            detail: detail
           })
         }
       }

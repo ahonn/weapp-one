@@ -1,0 +1,3 @@
+<view class="container">
+  <include src="../templates/musicItem.wxml"/>
+</view>

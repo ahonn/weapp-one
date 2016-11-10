@@ -1,30 +1,25 @@
-var util = require('../../../utils/util.js')
 Page({
   data: {
-    monthly: []
+    musics: []
   },
   onLoad: function (options) {
     var that = this
-
+    
     wx.showToast({
       title: '加载中',
       icon: 'loading'
     })
     wx.request({
-      url: 'http://v3.wufazhuce.com:8000/api/hp/bymonth/' + options.month,
+      url: 'http://v3.wufazhuce.com:8000/api/music/bymonth/' + options.month,
       header: {
         'Content-Type': 'application/json'
       },
       success: function (res) {
         if (res.data.res === 0) {
-          var monthly = res.data.data
+          var musics = res.data.data
 
-          monthly.map(function (vol) {
-            vol.date = new Date(vol.hp_makettime)
-            vol.hp_makettime = util.formatMakettime(vol.hp_makettime)
-          })
           that.setData({
-            monthly: monthly
+            musics: musics
           })
           wx.hideToast()
         }

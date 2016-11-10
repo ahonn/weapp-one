@@ -1,8 +1,3 @@
-.musics-swiper {
-  width: 100%;
-  height: 100%;
-}
-
 .music {
   height: 100%;
   width: calc(100% + 30rpx);

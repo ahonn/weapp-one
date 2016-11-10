@@ -20,8 +20,14 @@ Page({
     type: 'essay'
   },
   onLoad: function (options) {
-    var dateList = util.getDateList()
     var page = options.page
+
+    if (page === 'reading') {
+      var dateList = util.getDateList(2012, 10)
+    } else {
+      var dateList = util.getDateList(2016, 1)
+    }
+    
     this.setData({
       page: page,
       dateList: dateList
@@ -29,7 +35,14 @@ Page({
   },
   setType: function (e) {
     var type = e.target.dataset.type
+
+    if (type !== 'serialcontent') {
+      var dateList = util.getDateList(2012, 10)
+    } else {
+      var dateList = util.getDateList(2016, 1)
+    }
     this.setData({
+      dateList: dateList,
       type: type
     })
   },

@@ -1,7 +1,7 @@
 <view class="container">
   <view class="musics">
     <block wx:for="{{musics}}" wx:key="id">
-      <view class="music-item" data-di="{{item.id}}" bindtap="handleTap">
+      <view class="music-item" data-id="{{item.id}}" bindtap="handleTap">
         <view class="music-cover">
           <image class="music-cover-image" src="{{item.cover}}" mode="aspectFill"></image>
         </view>

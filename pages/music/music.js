@@ -2,7 +2,7 @@ var util = require('../../utils/util.js')
 Page({
   data: {
     musics: [],
-    current: 8,
+    current: 0,
     playId: -1,
     playImg: [],
     content: 'story'

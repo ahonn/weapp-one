@@ -14,7 +14,8 @@
         </view>
       </view>
       <view class="music-play" bindtap="togglePlay">
-        <image class="music-play-control" src="{{playImg[idx]}}" data-idx="{{idx}}"></image>
+        <image wx:if="{{playImg[idx]}}" class="music-play-control" src="{{playImg[idx]}}" data-idx="{{idx}}"></image>
+        <image wx:else class="music-play-control" src="{{playImg}}"></image>
       </view>
       <view class="music-title">
         <text>{{item.title}}</text>

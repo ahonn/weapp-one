@@ -2,7 +2,7 @@
 
 仿 [「ONE · 一个」](http://www.wandoujia.com/apps/one.hh.oneclient) 的微信小程序
 
-![](http://ww4.sinaimg.cn/large/006tNc79gw1f9mwmpb52eg30930g2u0y.gif)
+![](http://7xqvel.com1.z0.glb.clouddn.com/ONE-index.gif?imageView2/2/w/320)![](http://7xqvel.com1.z0.glb.clouddn.com/ONE-reading.gif?imageView2/2/w/320)![](http://7xqvel.com1.z0.glb.clouddn.com/ONE-music.gif?imageView2/2/w/320)
 
 ## 项目描述
 - 基于微信开发的仿「ONE · 一个」的微信小程序

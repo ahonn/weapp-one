@@ -1,0 +1,23 @@
+<template name="story">
+  <view class="music-story">
+    <view class="music-content-header">
+      <text class="content-label">音乐故事</text>
+      <view class="content-links">
+        <image class="link" src="../../image/music_story_selected.png" mode="aspectFill"></image>
+        <image class="link" src="../../image/music_lyric_default.png" mode="aspectFill" bindtap="showLyric"></image>
+        <image class="link" src="../../image/music_about_default.png" mode="aspectFill" bindtap="showAbout"></image>
+      </view>
+    </view>
+    <view class="music-content-body">
+      <view class="story-title">
+        <text>{{item.story_title}}</text>
+      </view>
+      <view class="story-author">
+        <text>{{item.story_author.user_name}}</text>
+      </view>
+      <view class="story-content">
+        <text>{{item.story}}</text>
+      </view>
+    </view>
+  </view>
+</template>

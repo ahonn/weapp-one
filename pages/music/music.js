@@ -2,6 +2,7 @@ var util = require('../../utils/util.js')
 Page({
   data: {
     musics: [],
+    current: 8,
     playId: -1,
     playImg: [],
     content: 'story'
@@ -56,6 +57,25 @@ Page({
         }
       }
     })
+  },
+  handleChange: function (e) {
+    var that = this
+    var current = e.detail.current
+    var length = this.data.musics.length
+
+    if (current === length) {
+      this.setData({
+        current: length
+      })
+      wx.navigateTo({
+        url: '../history/history?page=music',
+        success: function () {
+          that.setData({
+            current: length - 1
+          })
+        }
+      })
+    }
   },
   togglePlay: function (e) {
     var musicId = e.target.dataset.idx

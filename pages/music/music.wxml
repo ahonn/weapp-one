@@ -1,5 +1,5 @@
 <view class="container">
-  <swiper class="musics-swiper">
+  <swiper class="musics-swiper" current="{{current}}" bindchange="handleChange">
     <block wx:for="{{musics}}" wx:key="id" wx:for-index="idx">
       <swiper-item class="musics-swiper-item">
         <scroll-view class="music" scroll-y="true">
@@ -28,15 +28,19 @@
               </view>
             </view>
             <view class="music-content">
-              <include wx:if="{{content === 'story'}}" src="include/story.wxml" />
-              <include wx:elif="{{content === 'lyric'}}" src="include/lyric.wxml" />
-              <include wx:elif="{{content === 'about'}}" src="include/about.wxml" />
-              <view >
-              </view>
+              <import src="templates/story.wxml"/>
+              <template wx:if="{{content === 'story'}}" is="story" data="{{item: item}}"/>
+
+              <import src="templates/lyric.wxml"/>
+              <template wx:if="{{content === 'lyric'}}" is="lyric" data="{{item: item}}"/>
+
+              <import src="templates/about.wxml"/>
+              <template wx:if="{{content === 'about'}}" is="about" data="{{item: item}}"/>
             </view>
           </view>
         </scroll-view>
       </swiper-item>
     </block>
+    <swiper-item></swiper-item>
   </swiper>
 </view>

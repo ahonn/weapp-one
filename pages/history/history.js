@@ -22,7 +22,7 @@ Page({
   onLoad: function (options) {
     var page = options.page
 
-    if (page === 'reading') {
+    if (page === 'reading' || page === 'index') {
       var dateList = util.getDateList(2012, 10)
     } else {
       var dateList = util.getDateList(2016, 1)

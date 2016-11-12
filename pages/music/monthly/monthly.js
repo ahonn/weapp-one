@@ -1,27 +1,18 @@
+import api from '../../../api/api.js'
+
 Page({
   data: {
     musics: []
   },
   onLoad: function (options) {
-    var that = this
-    
-    wx.showToast({
-      title: '加载中',
-      icon: 'loading'
-    })
-    wx.request({
-      url: 'http://v3.wufazhuce.com:8000/api/music/bymonth/' + options.month,
-      header: {
-        'Content-Type': 'application/json'
+    api.getMusicsByMonth({
+      query: {
+        month: options.month
       },
-      success: function (res) {
+      success: (res) => {
         if (res.data.res === 0) {
-          var musics = res.data.data
-
-          that.setData({
-            musics: musics
-          })
-          wx.hideToast()
+          let musics = res.data.data
+          this.setData({ musics })
         }
       }
     })

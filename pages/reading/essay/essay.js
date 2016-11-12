@@ -1,57 +1,60 @@
-var util = require('../../../utils/util.js')
+import { 
+  AUDIO_PLAY_TEXT,
+  AUDIO_PLAY_IMG,
+  AUDIO_PAUSE_TEXT,
+  AUDIO_PAUSE_IMG
+} from '../../../utils/constants.js'
+import api from '../../../api/api.js'
+import util from '../../../utils/util.js'
+
 Page({
   data: {
     essay: {},
-    playText: '收听',
-    playImg: '../../../image/audio_play.png'
+    audioBtn: {
+      text: AUDIO_PLAY_TEXT,
+      imgPath: AUDIO_PLAY_IMG
+    }
   },
   onLoad: function (options) {
-    var that = this 
-    wx.request({
-      url: 'http://v3.wufazhuce.com:8000/api/essay/' + options.id,
-      header: {
-        'Content-Type': 'application/json'
+    api.getEssayById({
+      query: {
+        id: options.id
       },
-      success: function(res) {
+      success: (res) => {
         if (res.data.res === 0) {
-          var essay = res.data.data;
-          essay.hp_content = essay.hp_content.replace(/<.*?>/g, "")
+          let essay = res.data.data
+          essay.hp_content = util.filterHTML(essay.hp_content)
           essay.hp_makettime = util.formatMakettime(essay.hp_makettime)
-          that.setData({
-            essay: essay
-          })
+          this.setData({ essay })
         }
       }
     })
   },
   togglePlay: function (e) {
     var audio = this.data.essay.audio
-    var playText = this.data.playText
+    var audioBtn = this.data.audioBtn
     
-    var playImg
-    if (playText === '收听') {
-      playText = '暂停'
-      playImg = '../../../image/audio_pause.png'
+    if (audioBtn.text === AUDIO_PLAY_TEXT) {
+      audioBtn = {
+        text: AUDIO_PAUSE_TEXT,
+        imgPath: AUDIO_PAUSE_IMG
+      }
       this.playAudio(audio)
     } else {
-      playText = '收听'
-      playImg = '../../../image/audio_play.png'
+      audioBtn = {
+        text: AUDIO_PLAY_TEXT,
+        imgPath: AUDIO_PLAY_IMG
+      }
       this.pauseAudio()
     }
 
-    this.setData({
-      playText: playText,
-      playImg: playImg
-    })
+    this.setData({ audioBtn })
   },
   playAudio: function (audio) {
     var title = this.data.essay.hp_title
     wx.playBackgroundAudio({
       dataUrl: audio,
-      title: title,
-      fail: function () {
-        wx.showToast({ title: '播放失败' })
-      }
+      title: title
     })
   },
   pauseAudio: function () {

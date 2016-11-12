@@ -1,67 +1,57 @@
-var util = require('../../utils/util.js')
+import {
+  MUSIC_PALY_IMG,
+  MUSIC_PAUSE_IMG
+} from '../../utils/constants.js'
+import api from '../../api/api.js'
+import util from '../../utils/util.js'
+
 Page({
   data: {
     musics: [],
     current: 0,
-    playId: -1,
-    playImg: [],
-    content: 'story'
+    playId: -1
   },
   onLoad: function () {
-    var that = this
     wx.setNavigationBarTitle({
       title: '音乐'
     })
-    wx.request({
-      url: 'http://v3.wufazhuce.com:8000/api/music/idlist/0',
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function(res) {
+    api.getMusicIdList({
+      success: (res) => {
         if (res.data.res === 0) {
-          var idList = res.data.data.slice(0, 9)
-          idList.map(function (id) {
-            that.getMusics(id)
-          })
+          let idList = res.data.data
+          this.getMusics(idList)
         }
       }
     })
   },
-  getMusics: function (id) {
-    var that = this
-    wx.request({
-      url: 'http://v3.wufazhuce.com:8000/api/music/detail/' + id,
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function(res) {
-        if (res.data.res === 0) {
-          var music = res.data.data
-          var musics = that.data.musics
-          
-          music.story = music.story.replace(/<br>/g,"")
-          music.date = new Date(music.maketime)
-          music.maketime = util.formatMakettime(music.maketime)
-          musics.push(music)
-          musics.sort(function (a, b) {
-            return b.date - a.date
-          })
+  getMusics: function (idList) {
+    let musics = this.data.musics
 
-          var playImg = that.data.playImg
-          playImg.push('../../image/music_play.png')
+    if (idList.length > 0) {
+      api.getMusicDetailById({
+        query: {
+          id: idList.shift()
+        },
+        success: (res) => {
+          if (res.data.res === 0) {
+            let music = res.data.data
 
-          that.setData({
-            musics: musics,
-            playImg: playImg
-          })
-        }
-      }
-    })
+            music.playImg = MUSIC_PALY_IMG
+            music.contentType = 'story'
+            music.story = util.filterHTML(music.story)
+            music.maketime = util.formatMakettime(music.maketime)
+            musics.push(music)
+          }
+          this.getMusics(idList)
+        } 
+      })
+    } else {
+      this.setData({ musics })
+    }
   },
   handleChange: function (e) {
-    var that = this
-    var current = e.detail.current
-    var length = this.data.musics.length
+    let current = e.detail.current
+    let length = this.data.musics.length
 
     if (current === length) {
       this.setData({
@@ -69,8 +59,8 @@ Page({
       })
       wx.navigateTo({
         url: '../history/history?page=music',
-        success: function () {
-          that.setData({
+        success: () => {
+          this.setData({
             current: length - 1
           })
         }
@@ -78,55 +68,45 @@ Page({
     }
   },
   togglePlay: function (e) {
-    var musicId = e.target.dataset.idx
-    var music = this.data.musics[musicId]
-    var playId = this.data.playId
-    
-    var playImg = this.data.playImg.map(function(item) {
-      item = '../../image/music_play.png'
-      return item
+    let musics = this.data.musics
+    let playId = this.data.playId
+    let musicId = e.target.dataset.id
+    let music = musics.find((music) => music.id === musicId)
+
+    musics = musics.map((music) => {
+      music.playImg = MUSIC_PALY_IMG
+      return music
     })
 
     if (playId !== musicId) {
       playId = musicId
-      playImg[musicId] = '../../image/music_pause.png'
+      music.playImg = MUSIC_PAUSE_IMG
       this.playMusic(music)
     } else {
       playId = -1
-      playImg[musicId] = '../../image/music_play.png'
+      music.playImg = MUSIC_PALY_IMG
       this.pauseMusic()
     }
 
-    this.setData({
-      playId: playId,
-      playImg: playImg
-    })
+    this.setData({ musics, playId })
   },
   playMusic: function (music) {  
     wx.playBackgroundAudio({
       dataUrl: music.music_id,
-      title: music.title,
-      fail: function () {
-        wx.showToast({ title: '播放失败' })
-      }
+      title: music.title
     })
   },
   pauseMusic: function () {
     wx.pauseBackgroundAudio()
   },
-  showStory: function () {
-    this.setData({
-      content: 'story'
-    })
-  },
-  showLyric: function () {
-    this.setData({
-      content: 'lyric'
-    })
-  },
-  showAbout: function () {
-    this.setData({
-      content: 'about'
-    })
+  switchContent: function (e) {
+    let id = e.currentTarget.dataset.id
+    let type = e.target.dataset.type
+
+    let musics = this.data.musics
+    let music = musics.find((music) => music.id === id)
+    music.contentType = type
+
+    this.setData({ musics })
   }
 })

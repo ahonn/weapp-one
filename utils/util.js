@@ -1,8 +1,10 @@
-function formatMakettime(dateString) {
+const filterHTML = (string) => string.replace(/<.*?>/g, "")
+
+const formatMakettime = (dateString) => {
    return (new Date(dateString)).toString().split(' ', 4).slice(1, 4).join(' ')  
 }
 
-function getDateList(year, month) {
+const getDateList = (year, month) => {
   var now = new Date()
   var yearForNow = now.getFullYear()
   var monthForNow = now.getMonth()
@@ -35,6 +37,7 @@ function getDateList(year, month) {
 }
 
 module.exports = {
-  getDateList: getDateList,
-  formatMakettime: formatMakettime
+  getDateList,
+  filterHTML,
+  formatMakettime
 }

@@ -1,56 +1,46 @@
-var util = require('../../utils/util.js')
+import api from '../../api/api.js'
+import util from '../../utils/util.js'
+
 Page({
   data: {
     vols: [],
     current: 0
   },
   onLoad: function () {
-    var that = this
-    wx.request({
-      url: 'http://v3.wufazhuce.com:8000/api/hp/idlist/0', 
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function(res) {
+    api.getVolIdList({
+      success: (res) => {
         if (res.data.res === 0) {
-          var idList = res.data.data.slice(0, 9)
-          idList.map(function (id) {
-            that.getVols(id)
-          })
+          let idList = res.data.data
+          this.getVols(idList)
         }
       }
     })
   },
-  getVols: function (id) {
-    var that = this
-    wx.request({
-      url: 'http://v3.wufazhuce.com:8000/api/hp/detail/' + id,
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function(res) {
-        if (res.data.res === 0) {
-          var vol = res.data.data
-          var vols = that.data.vols
-          
-          vol.date = new Date(vol.hp_makettime)
-          vol.hp_makettime = util.formatMakettime(vol.hp_makettime)
-          vols.push(vol)
-          vols.sort(function (a, b) {
-            return b.date - a.date
-          })
+  getVols: function (idList) {
+    let vols = this.data.vols
 
-          that.setData({
-            vols: vols
-          })
+    if (idList.length > 0) {
+      api.getVolById({
+        query: {
+          id: idList.shift()
+        },
+        success: (res) => {
+          if (res.data.res === 0) {
+            let vol = res.data.data
+            
+            vol.hp_makettime = util.formatMakettime(vol.hp_makettime)
+            vols.push(vol)
+          }
+          this.getVols(idList)
         }
-      }
-    })
+      })
+    } else {
+      this.setData({ vols })
+    }
   },
   handleChange: function (e) {
-    var that = this
-    var current = e.detail.current
-    var volsLength = this.data.vols.length
+    let current = e.detail.current
+    let volsLength = this.data.vols.length
 
     if (current === volsLength) {
       this.setData({
@@ -58,8 +48,8 @@ Page({
       })
       wx.navigateTo({
         url: '../history/history?page=index',
-        success: function () {
-          that.setData({
+        success: () => {
+          this.setData({
             current: volsLength - 1
           })
         }

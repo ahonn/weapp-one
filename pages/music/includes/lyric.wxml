@@ -1,10 +1,10 @@
 <view class="music-lyric">
   <view class="music-content-header">
     <text class="content-label">歌词</text>
-    <view class="content-links">
-      <image class="link" src="../../../image/music_story_default.png" mode="aspectFill" bindtap="showStory"></image>
+    <view class="content-links" data-id="{{item.id}}" bindtap="switchContent">
+      <image class="link" src="../../../image/music_story_default.png" mode="aspectFill" data-type="story"></image>
       <image class="link" src="../../../image/music_lyric_selected.png" mode="aspectFill"></image>
-      <image class="link" src="../../../image/music_about_default.png" mode="aspectFill" bindtap="showAbout"></image>
+      <image class="link" src="../../../image/music_about_default.png" mode="aspectFill" data-type="about"></image>
     </view>
   </view>
   <view class="music-content-body">

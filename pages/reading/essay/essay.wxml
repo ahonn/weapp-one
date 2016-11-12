@@ -11,8 +11,8 @@
         </view>
       </view>
       <view class="essay-audio" bindtap="togglePlay">
-        <image class="essay-play-img" src="{{playImg}}"></image>
-        <text class="essay-play-text">{{playText}}</text>
+        <image class="essay-play-img" src="{{audioBtn.imgPath}}"></image>
+        <text class="essay-play-text">{{audioBtn.text}}</text>
       </view>
     </view>
     <view class="essay-body">

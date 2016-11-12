@@ -1,23 +1,21 @@
-var util = require('../../../utils/util.js')
+import api from '../../../api/api.js'
+import util from '../../../utils/util.js'
+
 Page({
   data: {
     question: {}
   },
   onLoad: function (options) {
-    var that = this
-    wx.request({
-      url: 'http://v3.wufazhuce.com:8000/api/question/' + options.id,
-      header: {
-        'Content-Type': 'application/json'
+    api.getQuestionById({
+      query: {
+        id: options.id
       },
-      success: function(res) {
+      success: (res) => {
         if (res.data.res === 0) {
-          var question = res.data.data;
-          question.answer_content = question.answer_content.replace(/<.*?>/g, "")
+          let question = res.data.data
+          question.answer_content = util.filterHTML(question.answer_content)
           question.question_makettime = util.formatMakettime(question.question_makettime)
-          that.setData({
-            question: question
-          })
+          this.setData({ question })
         }
       }
     })

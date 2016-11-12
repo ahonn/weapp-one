@@ -1,23 +1,21 @@
-var util = require('../../../utils/util.js')
+import api from '../../../api/api.js'
+import util from '../../../utils/util.js'
+
 Page({
   data: {
     serial: {}
   },
-  onLoad: function (options) {
-    var that = this
-    wx.request({
-      url: 'http://v3.wufazhuce.com:8000/api/serialcontent/' + options.id,
-      header: {
-        'Content-Type': 'application/json'
+  onLoad: function (options) {    
+    api.getSerialById({
+      query: {
+        id: options.id
       },
-      success: function(res) {
+      success: (res) => {
         if (res.data.res === 0) {
-          var serial = res.data.data;
-          serial.content = serial.content.replace(/<.*?>/g, "")
+          let serial = res.data.data
+          serial.content = util.filterHTML(serial.content)
           serial.maketime = util.formatMakettime(serial.maketime)
-          that.setData({
-            serial: serial
-          })
+          this.setData({ serial })
         }
       }
     })

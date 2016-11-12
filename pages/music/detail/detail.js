@@ -1,75 +1,63 @@
-var util = require('../../../utils/util.js')
+import {
+  MUSIC_PALY_IMG,
+  MUSIC_PAUSE_IMG
+} from '../../../utils/constants.js'
+import api from '../../../api/api.js'
+import util from '../../../utils/util.js'
+
 Page({
   data: {
-    item: [],
-    playing: false,
-    playImg: '../../../image/music_play.png',
-    content: 'story'
+    detail: [],
+    playing: false
   },
   onLoad: function (options) {
-    var that = this
-
-    wx.request({
-      url: 'http://v3.wufazhuce.com:8000/api/music/detail/' + options.id,
-      header: {
-        'Content-Type': 'application/json'
+    api.getMusicDetailById({
+      query: {
+        id: options.id
       },
-      success: function (res) {
+      success: (res) => {
         if (res.data.res === 0) {
-          var item = res.data.data
+          let detail = res.data.data
 
-          item.story = item.story.replace(/<br>/g,"")
-          item.maketime = util.formatMakettime(item.maketime)
-          that.setData({
-            item: item
-          })
+          detail.playImg = MUSIC_PALY_IMG
+          detail.contentType = 'story'
+          detail.story = util.filterHTML(detail.story)
+          detail.maketime = util.formatMakettime(detail.maketime)
+
+          this.setData({ detail })
         }
       }
     })
   },
   togglePlay: function (e) {
-    var music = this.data.item
-    var playing = this.data.playing
+    let detail = this.data.detail
+    let playing = this.data.playing
 
     if (!playing) {
-      var playImg = '../../../image/music_pause.png'
-      this.playMusic(music)
+      detail.playImg = MUSIC_PAUSE_IMG
+      this.playMusic(detail)
     } else {
-      var playImg = '../../../image/music_play.png'
+      detail.playImg = MUSIC_PALY_IMG
       this.pauseMusic()
     }
     playing = !playing
 
-    this.setData({
-      playing: playing,
-      playImg: playImg
-    })
+    this.setData({ detail, playing })
   },
   playMusic: function (music) {  
     wx.playBackgroundAudio({
       dataUrl: music.music_id,
-      title: music.title,
-      fail: function () {
-        wx.showToast({ title: '播放失败' })
-      }
+      title: music.title
     })
   },
   pauseMusic: function () {
     wx.pauseBackgroundAudio()
   },
-  showStory: function () {
-    this.setData({
-      content: 'story'
-    })
-  },
-  showLyric: function () {
-    this.setData({
-      content: 'lyric'
-    })
-  },
-  showAbout: function () {
-    this.setData({
-      content: 'about'
-    })
+  switchContent: function (e) {
+    let type = e.target.dataset.type
+    let detail = this.data.detail
+    
+    detail.contentType = type
+    this.setData({ detail })
   }
 })

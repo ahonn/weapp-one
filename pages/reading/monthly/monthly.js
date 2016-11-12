@@ -1,22 +1,21 @@
+import api from '../../../api/api.js'
+
 Page({
   data: {
     type: '',
     articles: []
   },
   onLoad: function (options) {
-    var that = this
-    var type = options.type
-    var month = options.month
-    
-    wx.request({
-      url: 'http://v3.wufazhuce.com:8000/api/' + type + '/bymonth/' + month,
-      header: {
-        'Content-Type': 'application/json'
+    let { type, month } = options
+    api.getArticlesByMonth({
+      query: {
+        type: type,
+        month: month
       },
-      success: function (res) {
+      success: (res) => {
         if (res.data.res === 0) {
-          var articles = res.data.data
-          that.setData({
+          let articles = res.data.data
+          this.setData({
             type: type,
             articles: articles
           })

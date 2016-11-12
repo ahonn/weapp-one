@@ -1,3 +1,5 @@
+import api from '../../api/api.js'
+
 Page({
   data: {
     carousel: [],
@@ -5,64 +7,49 @@ Page({
     current: 0
   },
   onLoad: function () {
-    var that = this
-
     wx.setNavigationBarTitle({
       title: '阅读'
     })
 
-    wx.request({
-      url: 'http://v3.wufazhuce.com:8000/api/reading/carousel',
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function(res) {
+    api.getCarousel({
+      success: (res) => {
         if (res.data.res === 0) {
-          var carousel = res.data.data;
-          that.setData({
-            carousel: carousel
-          })
+          let carousel = res.data.data
+          this.setData({ carousel })
         }
       }
     })
     
-    wx.request({
-      url: 'http://v3.wufazhuce.com:8000/api/reading/index',
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function(res) {
+    api.getLastArticles({
+      success: (res) => {
         if (res.data.res === 0) {
-          var articles = res.data.data
-          that.setData({
-            articles: articles
-          })
+          let articles = res.data.data
+          this.setData({ articles })
         }
       }
     })
   },
   tapEssay: function (e) {
-    var id = e.currentTarget.dataset.id
+    let id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: 'essay/essay?id=' + id
     })
   },
   tapSerial: function (e) {
-    var id = e.currentTarget.dataset.id
+    let id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: 'serial/serial?id=' + id
     })
   },
   tapQuestion: function (e) {
-    var id = e.currentTarget.dataset.id
+    let id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: 'question/question?id=' + id
     })
   },
   handleChange: function (e) {
-    var that = this
-    var current = e.detail.current
-    var length = this.data.articles.essay.length
+    let current = e.detail.current
+    let length = this.data.articles.essay.length
 
     if (current === length) {
       this.setData({
@@ -70,8 +57,8 @@ Page({
       })
       wx.navigateTo({
         url: '../history/history?page=reading',
-        success: function () {
-          that.setData({
+        success: () => {
+          this.setData({
             current: length - 1
           })
         }

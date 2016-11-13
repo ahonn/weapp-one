@@ -1,5 +1,5 @@
 <view class="container">
-  <scroll-view class="movies" scroll-y="true" bindscrolltolower="getMoreMovies">
+  <scroll-view class="movies" scroll-y="true" bindscrolltolower="getMovies">
     <view wx:for="{{movies}}" class="movie" wx:key="id">
       <image class="movie-cover" src="{{item.cover}}" mode="scaleToFill"></image>
     </view>

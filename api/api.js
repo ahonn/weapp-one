@@ -45,6 +45,9 @@ const getMusicIdList = (params) => wxRequest(params, host + '/api/music/idlist/0
 const getMusicsByMonth = (params) => wxRequest(params, host + '/api/music/bymonth/' + params.query.month)
 const getMusicDetailById = (params) => wxRequest(params, host + '/api/music/detail/' + params.query.id)
 
+// Movie
+const getMovieListById = (params) => wxRequest(params, host + '/api/movie/list/' + params.query.id)
+
 module.exports = {
   getVolById,
   getVolIdList,
@@ -58,5 +61,6 @@ module.exports = {
   getArticlesByMonth,
   getMusicIdList,
   getMusicsByMonth,
-  getMusicDetailById
+  getMusicDetailById,
+  getMovieListById
 }

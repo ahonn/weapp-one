@@ -1,43 +1,46 @@
-const filterHTML = (string) => string.replace(/<.*?>/g, "")
+import {
+  VOL_AND_READING_BEGIN_TIME,
+  OTHER_BEGIN_TIME,
+  MONTH_MAP
+} from './constants.js'
+
+const filterContent = (string) => string.replace(/[\r\n]/g, "").replace(/<.*?>/g, "\n")
 
 const formatMakettime = (dateString) => {
    return (new Date(dateString)).toString().split(' ', 4).slice(1, 4).join(' ')  
 }
 
-const getDateList = (year, month) => {
-  var now = new Date()
-  var yearForNow = now.getFullYear()
-  var monthForNow = now.getMonth()
+const getBeginTime = (type) => {
+  let isOther = type !== 'reading' && type !== 'essay' && type !== 'index'
+  let beginTime = isOther ? OTHER_BEGIN_TIME : VOL_AND_READING_BEGIN_TIME
+  return new Date(beginTime)
+}
 
-  var monthMap = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May.','Jun.', 
-                  'Jul.', 'Aug.', 'Sep.', 'Otc.', 'Nov.', 'Dec.']
+const getDateList = (type) => {
+  let begin = getBeginTime(type)
+  let beginYear = begin.getFullYear()
+  let beginMonth = begin.getMonth()
 
-  var dateList = []
-  for(var i = monthForNow; i >= 0; i--) {
-    var text = i === monthForNow ? '本月' : monthMap[i] + yearForNow
-    var value = yearForNow + '-' + (i + 1)
-    dateList.push({
-      text: text,
-      value: value
-    })
-  }
-  for(var i = yearForNow - 1; i >= year; i--) {
-    for(var j = 11; j >= 0; j--) {
-      if (i > year || (i == year && j >= month - 1)) {
-        var text = monthMap[j] + i
-        var value = i + '-' + (j + 1)
-        dateList.push({
-          text: text,
-          value: value
-        })
-      }
+  let now = new Date()
+  let nowYear = now.getFullYear()
+  let nowMonth = now.getMonth()
+
+  let dateList = [];
+  for (let y = nowYear; y >= beginYear; y--) {
+    for(let m = 11; m >= 0; m--) {
+      dateList.push({
+        text: MONTH_MAP[m] + y,
+        value: y + '-' + (m + 1)
+      })
     }
   }
+  
+  dateList = dateList.slice(11 - nowMonth, dateList.length - beginMonth)
   return dateList
 }
 
 module.exports = {
   getDateList,
-  filterHTML,
+  filterContent,
   formatMakettime
 }

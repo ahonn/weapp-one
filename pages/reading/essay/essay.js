@@ -23,7 +23,7 @@ Page({
       success: (res) => {
         if (res.data.res === 0) {
           let essay = res.data.data
-          essay.hp_content = util.filterHTML(essay.hp_content)
+          essay.hp_content = util.filterContent(essay.hp_content)
           essay.hp_makettime = util.formatMakettime(essay.hp_makettime)
           this.setData({ essay })
         }

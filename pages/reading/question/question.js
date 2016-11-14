@@ -13,7 +13,7 @@ Page({
       success: (res) => {
         if (res.data.res === 0) {
           let question = res.data.data
-          question.answer_content = util.filterHTML(question.answer_content)
+          question.answer_content = util.filterContent(question.answer_content)
           question.question_makettime = util.formatMakettime(question.question_makettime)
           this.setData({ question })
         }

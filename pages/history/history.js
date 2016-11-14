@@ -20,36 +20,25 @@ Page({
     type: 'essay'
   },
   onLoad: function (options) {
-    var page = options.page
-
-    if (page === 'reading' || page === 'index') {
-      var dateList = util.getDateList(2012, 10)
-    } else {
-      var dateList = util.getDateList(2016, 1)
-    }
-    
+    let page = options.page
+    let dateList = util.getDateList(page)
     this.setData({
       page: page,
       dateList: dateList
     })
   },
   setType: function (e) {
-    var type = e.target.dataset.type
-
-    if (type !== 'serialcontent') {
-      var dateList = util.getDateList(2012, 10)
-    } else {
-      var dateList = util.getDateList(2016, 1)
-    }
+    let type = e.target.dataset.type
+    let dateList = util.getDateList(type)
     this.setData({
       dateList: dateList,
       type: type
     })
   },
   getMonthly: function (e) {
-    var month = e.target.dataset.month
-    var page = this.data.page
-    var type = this.data.type
+    let month = e.target.dataset.month
+    let page = this.data.page
+    let type = this.data.type
     wx.navigateTo({
       url: '../' + page + '/monthly/monthly?month=' + month + '&type=' + type
     })

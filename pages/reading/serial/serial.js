@@ -13,7 +13,7 @@ Page({
       success: (res) => {
         if (res.data.res === 0) {
           let serial = res.data.data
-          serial.content = util.filterHTML(serial.content)
+          serial.content = util.filterContent(serial.content)
           serial.maketime = util.formatMakettime(serial.maketime)
           this.setData({ serial })
         }

@@ -2,9 +2,13 @@ import api from '../../../api/api.js'
 
 Page({
   data: {
+    title: '',
     musics: []
   },
   onLoad: function (options) {
+    this.setData({ 
+      title: options.title
+    })
     api.getMusicsByMonth({
       query: {
         month: options.month
@@ -15,6 +19,11 @@ Page({
           this.setData({ musics })
         }
       }
+    })
+  },
+  onReady: function () {
+    wx.setNavigationBarTitle({
+      title: this.data.title
     })
   },
   handleTap: function (e) {

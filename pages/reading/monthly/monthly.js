@@ -3,9 +3,14 @@ import api from '../../../api/api.js'
 Page({
   data: {
     type: '',
+    title: '',
     articles: []
   },
   onLoad: function (options) {
+    this.setData({ 
+      title: options.title
+    })
+    
     let { type, month } = options
     api.getArticlesByMonth({
       query: {
@@ -21,6 +26,11 @@ Page({
           })
         }
       }
+    })
+  },
+  onReady: function () {
+    wx.setNavigationBarTitle({
+      title: this.data.title
     })
   },
   tapEssay: function (e) {

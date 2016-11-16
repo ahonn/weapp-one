@@ -30,6 +30,11 @@ Page({
       }
     })
   },
+  onReady: function () {
+    wx.setNavigationBarTitle({
+      title: '短篇'
+    })
+  },
   togglePlay: function (e) {
     var audio = this.data.essay.audio
     var audioBtn = this.data.audioBtn

@@ -12,6 +12,7 @@
     "pages/music/monthly/monthly",
     "pages/music/detail/detail",
     "pages/movie/movie",
+    "pages/movie/detail/detail",
     "pages/history/history"
   ],
   "window":{

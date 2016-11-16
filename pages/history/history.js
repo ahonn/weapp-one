@@ -27,6 +27,11 @@ Page({
       dateList: dateList
     })
   },
+  onReady: function () {
+    wx.setNavigationBarTitle({
+      title: '往期列表'
+    })
+  },
   setType: function (e) {
     let type = e.target.dataset.type
     let dateList = util.getDateList(type)
@@ -37,10 +42,11 @@ Page({
   },
   getMonthly: function (e) {
     let month = e.target.dataset.month
+    let title = e.target.dataset.title
     let page = this.data.page
     let type = this.data.type
     wx.navigateTo({
-      url: '../' + page + '/monthly/monthly?month=' + month + '&type=' + type
+      url: `../${page}/monthly/monthly?type=${type}&title=${title}&month=${month}`
     })
   }
 })

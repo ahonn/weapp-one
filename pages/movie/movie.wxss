@@ -3,6 +3,7 @@
 }
 
 .movie {
+  position: relative;
   margin-bottom: 5px;
 }
 
@@ -10,4 +11,12 @@
   width: 100%;
   height: 160px;
   box-shadow: 0 2px 2px #ebebeb;
+}
+
+.movie-score {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 28px;
+  color: #f00;
 }

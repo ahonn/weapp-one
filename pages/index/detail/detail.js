@@ -18,5 +18,10 @@ Page({
         }
       }
     })
+  },
+  onReady: function () {
+    wx.setNavigationBarTitle({
+      title: '图文'
+    })
   }
 })

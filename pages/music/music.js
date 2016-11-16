@@ -12,9 +12,6 @@ Page({
     playId: -1
   },
   onLoad: function () {
-    wx.setNavigationBarTitle({
-      title: '音乐'
-    })
     api.getMusicIdList({
       success: (res) => {
         if (res.data.res === 0) {
@@ -22,6 +19,11 @@ Page({
           this.getMusics(idList)
         }
       }
+    })
+  },
+  onReady: function () {
+    wx.setNavigationBarTitle({
+      title: '音乐'
     })
   },
   getMusics: function (idList) {
@@ -38,7 +40,7 @@ Page({
 
             music.playImg = MUSIC_PALY_IMG
             music.contentType = 'story'
-            music.story = util.filterHTML(music.story)
+            music.story = util.filterContent(music.story)
             music.maketime = util.formatMakettime(music.maketime)
             musics.push(music)
           }

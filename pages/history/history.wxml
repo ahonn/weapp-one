@@ -10,8 +10,8 @@
   </view>
   <scroll-view scroll-y="true">
     <block wx:for="{{dateList}}" wx:key="value">
-      <view class="history-bymonth" data-month="{{item.value}}" bindtap="getMonthly">
-        <text class="history-date">{{item.text}}</text>
+      <view class="history-bymonth" data-month="{{item.value}}" data-title="{{item.title}}" bindtap="getMonthly">
+        <text class="history-date">{{item.title}}</text>
         <image class="forward" src="../../../image/forward.png"></image>
       </view>
     </block>

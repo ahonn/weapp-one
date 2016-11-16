@@ -7,10 +7,6 @@ Page({
     current: 0
   },
   onLoad: function () {
-    wx.setNavigationBarTitle({
-      title: '阅读'
-    })
-
     api.getCarousel({
       success: (res) => {
         if (res.data.res === 0) {
@@ -27,6 +23,11 @@ Page({
           this.setData({ articles })
         }
       }
+    })
+  },
+  onReady: function () {
+    wx.setNavigationBarTitle({
+      title: '阅读'
     })
   },
   tapEssay: function (e) {

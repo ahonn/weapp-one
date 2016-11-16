@@ -29,7 +29,7 @@ const getDateList = (type) => {
   for (let y = nowYear; y >= beginYear; y--) {
     for(let m = 11; m >= 0; m--) {
       dateList.push({
-        text: MONTH_MAP[m] + y,
+        title: MONTH_MAP[m] + y,
         value: y + '-' + (m + 1)
       })
     }

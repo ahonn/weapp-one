@@ -3,9 +3,13 @@ import util from '../../../utils/util.js'
 
 Page({
   data: {
+    title: '',
     monthly: []
   },
   onLoad: function (options) {
+    this.setData({ 
+      title: options.title
+    })
     api.getVolsByMonth({
       query: {
         month: options.month
@@ -21,6 +25,11 @@ Page({
         }
       }
     }) 
+  },
+  onReady: function () {
+    wx.setNavigationBarTitle({
+      title: this.data.title
+    })
   },
   handleTap: function (e) {
     let id = e.currentTarget.dataset.id

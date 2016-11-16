@@ -21,12 +21,17 @@ Page({
 
           detail.playImg = MUSIC_PALY_IMG
           detail.contentType = 'story'
-          detail.story = util.filterHTML(detail.story)
+          detail.story = util.filterContent(detail.story)
           detail.maketime = util.formatMakettime(detail.maketime)
 
           this.setData({ detail })
         }
       }
+    })
+  },
+  onReady: function () {
+    wx.setNavigationBarTitle({
+      title: '单曲'
     })
   },
   togglePlay: function (e) {

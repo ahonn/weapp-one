@@ -6,7 +6,6 @@
 
 ## 项目描述
 - 基于微信开发的仿「ONE · 一个」的微信小程序
-- API 均由 「ONE · 一个」提供，参考 [ONE-API](https://github.com/lipeiwei-szu/ONE-API) 项目
 - 项目中的部分静态资源来自 [ReactNativeOne](https://github.com/lipeiwei-szu/ReactNativeOne) 项目
 
 **需要开启开发环境不校验请求域名以及 TLS 版本**

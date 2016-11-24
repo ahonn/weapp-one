@@ -9,7 +9,7 @@
 - API 均由 「ONE · 一个」提供，参考 [ONE-API](https://github.com/lipeiwei-szu/ONE-API) 项目
 - 项目中的部分静态资源来自 [ReactNativeOne](https://github.com/lipeiwei-szu/ReactNativeOne) 项目
 
-**由于 ONE 的 API 是 8000 端口，微信小程序开发工具做了域名限制，不能有端口号，本地运行需要手动 hack**
+**需要开启开发环境不校验请求域名以及 TLS 版本**
 
 ## 功能
 - 每日图文，往期列表，每月图文列表
